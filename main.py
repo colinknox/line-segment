@@ -2,14 +2,18 @@ class LineSegment:
     def __init__(self, center_x, width):
         self.center_x = center_x
         self.width = width
-        self.left_edge = self.center_x - self.width
-        self.right_edge = self.center_x + self.width
+        self.__range = width / 2 
+        self.left_edge = self.center_x - self.__range
+        self.right_edge = self.center_x + self.__range
 
-
-
-line_one = LineSegment(5, 3)
-
-print(f"DEBUG: center x = {line_one.center_x}")
-print(f"DEBUG: width = {line_one.width}")
-print(f"DEBUG: left edge = {line_one.left_edge}")
-print(f"DEBUG: right edge = {line_one.right_edge}")
+    def contains_point(self, x):
+        if self.left_edge <= x <= self.right_edge:
+            return True
+        else:
+            return False
+        
+    def overlaps_with(self, other):
+        if self.left_edge <= other.right_edge and self.right_edge >= other.left_edge:
+            return True
+        else:
+            return False
